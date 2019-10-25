@@ -4,7 +4,9 @@
   "private": true,
   "dependencies": {
     "@myonlinestore/bricks": "^1.15.2",
+    "@popmotion/popcorn": "^0.4.2",
     "@types/styled-components": "^4.1.19",
+    "array-move": "^2.1.0",
     "framer-motion": "^1.6.7",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",

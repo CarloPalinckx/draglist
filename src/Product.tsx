@@ -1,14 +1,7 @@
 import React, { FC } from 'react';
-import { Heading, Box, Text, Icon, CubesIcon } from '@myonlinestore/bricks';
+import { Box, Text, IconButton, GearIcon, TrashIcon, Contrast, ButtonGroup } from '@myonlinestore/bricks';
 import styled from 'styled-components';
-
-const Card = styled.div`
-    position: relative;
-    border-radius: 24px;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.03);
-    overflow: hidden;
-    background: #fff;
-`;
+import Card from './Card';
 
 const Img = styled.img`
     transform: translate(-50%, -50%);
@@ -24,6 +17,7 @@ type PropsType = {
     name: string;
     supply: number;
     showImage: boolean;
+    dragging: boolean;
 };
 
 const Product: FC<PropsType> = props => {
@@ -38,26 +32,36 @@ const Product: FC<PropsType> = props => {
     }
 
     return (
-        <Card>
-            <Box>
+        <Card dragging={props.dragging}>
+            <Box width="100%" alignItems="center">
                 {props.showImage && (
-                    <Box style={{ overflow: 'hidden' }} position="relative" width="180px" height="180px">
+                    <Box
+                        margin={[24, 0, 24, 24]}
+                        style={{ borderRadius: '9px', overflow: 'hidden', transition: 'width 300ms, height 300ms' }}
+                        position="relative"
+                        width="90px"
+                        height="90px"
+                    >
                         <Img src={props.image} />
                     </Box>
                 )}
-                <Box direction="column" width="400px" padding={[24, 48, 24, 24]}>
-                    <Text severity="info">3265235</Text>
-                    <Box margin={[9, 0, 0, 0]}>
-                        <Text variant="extraLarge">{props.name}</Text>
-                    </Box>
-                    <Box margin={[0, 0, 0, 0]} direction="column">
-                        <Text variant="large" strong>
-                            € 22,50
+                <Box style={{ overflow: 'hidden' }}>
+                    <Box padding={[6, 36, 6, 24]} direction="column">
+                        <Text variant="small" severity="info">
+                            3265235
                         </Text>
                         <Box margin={[6, 0, 0, 0]}>
+                            <Text variant="extraLarge">{props.name}</Text>
+                        </Box>
+                        <Box margin={[0, 0, 0, 0]}>
                             <Text severity={supplyStatus}>
-                                <b>{props.supply}</b> op voorraad
+                                <Text strong as="span" severity={supplyStatus}>
+                                    {props.supply}
+                                </Text>
+                                &nbsp;op voorraad
                             </Text>
+                            &nbsp; &nbsp;
+                            <Text severity="info">€ 22,50</Text>
                         </Box>
                     </Box>
                 </Box>
